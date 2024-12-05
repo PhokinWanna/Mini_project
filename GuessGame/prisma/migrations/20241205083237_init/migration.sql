@@ -8,13 +8,12 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Recipe" (
+CREATE TABLE "Score" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "title" TEXT NOT NULL,
-    "ingredients" TEXT NOT NULL,
-    "steps" TEXT NOT NULL,
-    "createdBy" INTEGER NOT NULL,
-    CONSTRAINT "Recipe_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "value" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Score_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex
