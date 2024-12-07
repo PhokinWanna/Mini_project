@@ -47,6 +47,7 @@ export async function logoutUser() {
   // Destroy the session 
   // cookies().set("session", "", { expires: new Date(0) });
   cookies().delete('session')
+  console.log("Logout is success")
   return { message: "Logout Success" }
 }
 

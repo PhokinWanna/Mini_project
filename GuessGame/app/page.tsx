@@ -2,10 +2,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (<>
-    <h1>My App</h1> 
-    <hr />
-    <ul className="list-disc"> 
-      <li> <Link href="/blog">Blog</Link></li> 
-    </ul>
+    <div className="bg-gray-400 w-full">
+      <h1 className="text-center text-black-300 text-2xl ">Wellcome To Me Project</h1> 
+    </div>
   </>)
 }
