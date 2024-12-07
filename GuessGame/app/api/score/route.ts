@@ -1,26 +1,59 @@
+// import { NextResponse } from "next/server";
+// import prisma from "../../../utils/db";
+
+// export async function POST(req: Request) {
+//   try {
+//     const body = await req.json();
+//     const { value, userId } = body;
+
+//     // Create a new score entry for the user
+//     const newScore = await prisma.score.create({
+//       data: {
+//         value,
+//         userId,
+//       },
+//     });
+
+//     return NextResponse.json({ success: true, newScore });
+//   } catch (error) {
+//     console.error("Error saving score:", error);
+//     const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+//     return NextResponse.json({ success: false, error: errorMessage }, { status: 500 });
+//   }
+// }
+
+
 import { NextResponse } from "next/server";
 import prisma from "../../../utils/db";
 
 export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const { value, userId } = body;
+    try {
+        const body = await req.json();
+        const { value } = body;
 
-    const newScore = await prisma.score.create({
-      data: {
-        value,
-        userId,
-      },
-    });
+        // Mock getting the user ID from the session
+        // Replace with actual user ID retrieval
+        const userId = 1; // Example: get user ID from session or token
 
-    return NextResponse.json({ success: true, newScore });
-  } catch (error) {
-    console.error("Error saving score:", error);
+        if (!userId) {
+            throw new Error("User not authenticated.");
+        }
 
-    // Ensure error is handled properly
-    const errorMessage =
-      error instanceof Error ? error.message : "An unexpected error occurred";
+        const newScore = await prisma.score.create({
+            data: {
+                value,
+                userId,
+            },
+        });
 
-    return NextResponse.json({ success: false, error: errorMessage }, { status: 500 });
-  }
+        return NextResponse.json({ success: true, newScore });
+    } catch (error) {
+        console.error("Error saving score:", error);
+        const errorMessage =
+            error instanceof Error ? error.message : "An unexpected error occurred";
+        return NextResponse.json(
+            { success: false, error: errorMessage },
+            { status: 500 }
+        );
+    }
 }

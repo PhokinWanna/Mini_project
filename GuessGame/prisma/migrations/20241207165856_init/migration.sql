@@ -18,3 +18,6 @@ CREATE TABLE "Score" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Score_userId_key" ON "Score"("userId");

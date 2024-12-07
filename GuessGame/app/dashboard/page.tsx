@@ -8,9 +8,8 @@ export default async function DashboardPage() {
       user: true,
     },
     orderBy: {
-      value: "desc",
+      value: "desc", // This will order by highest score
     },
-    take: 10,
   });
 
   return (

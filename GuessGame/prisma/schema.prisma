@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,18 +11,19 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   name     String
-  email    String   @unique
+  email    String  @unique
   password String
-  role     String   @default("user") // user or admin
+  role     String  @default("user") // user or admin
   scores   Score[]
 }
 
 model Score {
   id        Int      @id @default(autoincrement())
   value     Int
-  userId    Int
+  userId    Int      // Remove the @unique constraint
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
+
