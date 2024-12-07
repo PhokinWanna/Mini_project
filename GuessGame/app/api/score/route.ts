@@ -1,27 +1,3 @@
-// import { NextResponse } from "next/server";
-// import prisma from "../../../utils/db";
-
-// export async function POST(req: Request) {
-//   try {
-//     const body = await req.json();
-//     const { value, userId } = body;
-
-//     // Create a new score entry for the user
-//     const newScore = await prisma.score.create({
-//       data: {
-//         value,
-//         userId,
-//       },
-//     });
-
-//     return NextResponse.json({ success: true, newScore });
-//   } catch (error) {
-//     console.error("Error saving score:", error);
-//     const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
-//     return NextResponse.json({ success: false, error: errorMessage }, { status: 500 });
-//   }
-// }
-
 
 import { NextResponse } from "next/server";
 import prisma from "../../../utils/db";
@@ -39,14 +15,29 @@ export async function POST(req: Request) {
             throw new Error("User not authenticated.");
         }
 
-        const newScore = await prisma.score.create({
-            data: {
-                value,
-                userId,
-            },
+        // Check if the user already has a score
+        const existingScore = await prisma.score.findUnique({
+            where: { userId },
         });
 
-        return NextResponse.json({ success: true, newScore });
+        let updatedScore;
+        if (existingScore) {
+            // Increment the user's score
+            updatedScore = await prisma.score.update({
+                where: { userId },
+                data: { value: existingScore.value + value },
+            });
+        } else {
+            // Create a new score entry
+            updatedScore = await prisma.score.create({
+                data: {
+                    value,
+                    userId,
+                },
+            });
+        }
+
+        return NextResponse.json({ success: true, updatedScore });
     } catch (error) {
         console.error("Error saving score:", error);
         const errorMessage =
