@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               Guess Game
             </Link>
             <div className="flex space-x-4">
-              <Link href="/game">Play</Link>
+              <Link href="/api/auth/session">Play</Link>
               <Link href="/dashboard">Leaderboard</Link>
             </div>
             <div>
