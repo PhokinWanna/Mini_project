@@ -32,7 +32,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
             <div>
                 {user ?
-                    <>Hello: {user.name} | <Logout /> </> :
+                    <>Hello: {user.name}| <Logout /> </> :
                     <>
                       <Link className="ml-2" href="/api/auth/login">Login</Link> | 
                       <Link className="ml-2" href="/api/auth/register">Register</Link>

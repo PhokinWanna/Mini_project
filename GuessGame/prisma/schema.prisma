@@ -20,10 +20,11 @@ model User {
 }
 
 model Score {
-  id        Int      @id @default(autoincrement())
-  value     Int
-  userId    Int      // Remove the @unique constraint
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
+    id        Int      @id @default(autoincrement())
+    value     Int
+    userId    Int      @unique
+    user      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
 }
+
 

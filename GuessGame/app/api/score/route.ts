@@ -1,8 +1,11 @@
 
 import { NextResponse } from "next/server";
 import prisma from "../../../utils/db";
+import { getSession } from "@/utils/loginUser";
 
 export async function POST(req: Request) {
+  const user = await getSession();
+
     try {
         const body = await req.json();
         const { value } = body;
