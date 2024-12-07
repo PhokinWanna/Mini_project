@@ -12,33 +12,36 @@ export async function POST(req: Request) {
 
         // Mock getting the user ID from the session
         // Replace with actual user ID retrieval
-        const userId = 1; // Example: get user ID from session or token
+        // const userId = 1; // Example: get user ID from session or token
 
-        if (!userId) {
+        if (!user.id) {
             throw new Error("User not authenticated.");
         }
 
-        // Check if the user already has a score
-        const existingScore = await prisma.score.findUnique({
-            where: { userId },
-        });
+// Assuming `user.id` is available
+const userId = user.id;
 
-        let updatedScore;
-        if (existingScore) {
-            // Increment the user's score
-            updatedScore = await prisma.score.update({
-                where: { userId },
-                data: { value: existingScore.value + value },
-            });
-        } else {
-            // Create a new score entry
-            updatedScore = await prisma.score.create({
-                data: {
-                    value,
-                    userId,
-                },
-            });
-        }
+const existingScore = await prisma.score.findUnique({
+    where: { userId }, // Correct field is `userId`
+});
+
+let updatedScore;
+if (existingScore) {
+    // Increment the user's score if they already have one
+    updatedScore = await prisma.score.update({
+        where: { userId },
+        data: { value: existingScore.value + value },
+    });
+} else {
+    // Create a new score if the user doesn't have one
+    updatedScore = await prisma.score.create({
+        data: {
+            value,
+            userId, // Correct field is `userId`
+        },
+    });
+}
+
 
         return NextResponse.json({ success: true, updatedScore });
     } catch (error) {
