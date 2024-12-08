@@ -83,7 +83,7 @@ export default function GamePage() {
               🤔
             </h3>
             <p className="mt-5 text-center text-xl text-gray-600">
-               {number}Lives Remaining: {lives} ❤️
+               Lives Remaining: {lives} ❤️
             </p>
             {feedback && <p className="mt-4 text-3xl text-center font-dancing">{feedback}</p>}
             {!isGameOver ? (
