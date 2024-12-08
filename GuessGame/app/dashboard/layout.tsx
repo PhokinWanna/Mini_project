@@ -8,15 +8,15 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <header className="bg-blue-600 text-white py-6">
-        <h1 className="text-center text-3xl font-bold ">DASHBOARD ♟️</h1>
+      <header className="bg-yellow-500 text-white py-6">
+        <h1 className="text-center text-3xl font-bold">DASHBOARD</h1>
       </header>
       <main className="flex-grow p-4">
         {children}
       </main>
-      <footer className="bg-gray-200 text-center py-2 text-sm">
+      {/* <footer className="bg-gray-200 text-center py-2 text-sm">
         &copy; {new Date().getFullYear()} Guess Number Game
-      </footer>
+      </footer> */}
     </div>
   );
 }

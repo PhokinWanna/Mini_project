@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Head from "next/head";
 
 export default function GamePage() {
     const [guess, setGuess] = useState("");
@@ -51,7 +52,7 @@ export default function GamePage() {
             } catch (error) {
                 console.error("Error saving score:", error);
             }
-            setTimeout(() => router.push("/dashboard"), 200);
+            setTimeout(() => router.push("/dashboard"), 1000);
         } else {
             setFeedback(userGuess < number ? "🔻 Too low!" : "🔺 Too high!");
             setLives((prev) => prev - 1);
@@ -71,11 +72,20 @@ export default function GamePage() {
 
     return (
         <div className="max-w-md mx-auto mt-10">
-            <h2 className="text-center text-2xl font-bold">Guess the Number</h2>
-            <p className="text-center text-gray-600">
-                {number}Lives Remaining: {lives} ❤️
+            {/* <style>
+            @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Dancing+Script:wght@400..700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Dancing+Script:wght@400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+            </style> */}
+            <h2 className="text-center text-5xl font-nunito font-bold">Guess the Number</h2>
+            <h3 className="text-center text-7xl mt-4 font-nunito font-bold">
+              🤔
+            </h3>
+            <p className="mt-5 text-center text-xl text-gray-600">
+               {number}Lives Remaining: {lives} ❤️
             </p>
-            {feedback && <p className="mt-4 text-center">{feedback}</p>}
+            {feedback && <p className="mt-4 text-3xl text-center font-dancing">{feedback}</p>}
             {!isGameOver ? (
                 <form onSubmit={handleSubmit} className="space-y-4 mt-4">
                     <input
@@ -95,9 +105,12 @@ export default function GamePage() {
                 </form>
             ) : (
                 <div className="text-center mt-6">
-                    <h3 className="text-red-500 text-xl font-bold">
-                        Game Over!
+                    <h3 className="text-red-500 text-center text-3xl font-bold">
+                        Game Over! 🥲
                     </h3>
+                    <h4 className="text-red-400 text-xl text-center font-thin">
+                        let's try again!!
+                    </h4>
                     <button
                         onClick={handleRestart}
                         className="mt-4 px-6 py-2 bg-green-500 text-white rounded"

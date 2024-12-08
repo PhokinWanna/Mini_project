@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-
 const prisma = new PrismaClient();
 
 export default async function DashboardPage() {
@@ -14,7 +13,8 @@ export default async function DashboardPage() {
 
   return (
     <div className="max-w-4xl mx-auto mt-10">
-      <h2 className="text-center text-2xl font-bold">Leaderboard</h2>
+
+      <h2 className="text-center text-2xl font-bold">Leaderboard🥇</h2>
       <table className="table-auto w-full mt-5 border-collapse border border-gray-200">
         <thead>
           <tr className="bg-gray-100">
